@@ -83,6 +83,59 @@ class FruitController
         return new FruitResource($fruit);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/fruits/create",
+     *     summary="Создание фрукта.",
+     *     tags={"API Fruits"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Pass fruit data",
+     *         @OA\JsonContent(
+     *             required={"name","price"},
+     *             @OA\Property(
+     *                 property="name",
+     *                 type="string",
+     *                 example="Манго"
+     *             ),
+     *             @OA\Property(
+     *                 property="price",
+     *                 type="number",
+     *                 example=3000
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Фрукт создан.",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="id",
+     *                     type="integer",
+     *                     example=3
+     *                 ),
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string",
+     *                     example="Манго"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="price",
+     *                     type="number",
+     *                     example=3000
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid input"
+     *     ),
+     * )
+     */
     public function createFruit(Request $request)
     {
         // валидация
