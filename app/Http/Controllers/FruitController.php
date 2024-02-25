@@ -9,7 +9,56 @@ use App\Http\Resources\FruitResource;
 
 class FruitController
 {
-    // метод для получения фруктов
+    /**
+     * @OA\Get(
+     *      path="/api/fruits/get-all",
+     *      operationId="getFruits",
+     *      tags={"API Fruits"},
+     *      summary="Получение списка всех фруктов",
+     *      description="Возвращает список всех фруктов, доступных в базе данных.",
+     *      security={{"bearerAuth":{}}},
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="id",
+     *                          type="integer",
+     *                          example=2
+     *                      ),
+     *                      @OA\Property(
+     *                          property="name",
+     *                          type="string",
+     *                          example="Киви"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="price",
+     *                          type="number",
+     *                          example=2000
+     *                      )
+     *                  )
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal Server Error",
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                  property="error",
+     *                  type="string",
+     *                  example="An unexpected error occurred."
+     *              )
+     *          )
+     *      )
+     * )
+     */
     public function getFruits()
     {
         $fruits = Fruit::all();
